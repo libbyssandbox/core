@@ -1,5 +1,9 @@
 local Angle = Angle
 local ErrorNoHaltWithStack = ErrorNoHaltWithStack
+local isangle = isangle
+local isbool = isbool
+local IsColor = IsColor
+local isnumber = isnumber
 local isvector = isvector
 local tobool = tobool
 local tonumber = tonumber
@@ -37,5 +41,21 @@ function util.ForceType(value, force)
 		end
 	else
 		return value
+	end
+end
+
+function util.GetValueForce(value)
+	if isnumber(value) then
+		return FORCE_NUMBER
+	elseif isbool(value) then
+		return FORCE_BOOL
+	elseif isangle(value) then
+		return FORCE_ANGLE
+	elseif IsColor(value) then
+		return FORCE_COLOR
+	elseif isvector(value) then
+		return FORCE_VECTOR
+	else
+		return FORCE_STRING
 	end
 end
