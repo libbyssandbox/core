@@ -1,3 +1,5 @@
+AddCSLuaFile()
+
 local string = string
 
 local function DoTitleCase(first, rest)

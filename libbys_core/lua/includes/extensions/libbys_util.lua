@@ -1,3 +1,5 @@
+AddCSLuaFile()
+
 local Angle = Angle
 local ErrorNoHaltWithStack = ErrorNoHaltWithStack
 local isangle = isangle

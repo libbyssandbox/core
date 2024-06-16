@@ -1,3 +1,5 @@
+AddCSLuaFile()
+
 local error = error
 local ErrorNoHaltWithStack = ErrorNoHaltWithStack
 local Format = Format
