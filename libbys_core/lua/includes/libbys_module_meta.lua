@@ -9,6 +9,8 @@ AccessorFunc(MODULE, "m_strName", "Name", FORCE_STRING)
 AccessorFunc(MODULE, "m_bEnabled", "Enabled_Internal", FORCE_BOOL)
 
 function MODULE:Init()
+	self.m_bEnabled = nil -- Kill it so we can test it later
+
 	self:ConfigInit()
 
 	self.m_ConVars = {}
@@ -16,7 +18,16 @@ end
 
 function MODULE:Setup(name)
 	self:SetName(name)
-	self:SetEnabled(true)
+
+	self:SetupConfig()
+
+	if self.m_bEnabled == nil then -- If it wasn't changed during setup, default to enabled
+		self:SetEnabled(true)
+	end
+end
+
+function MODULE:SetupConfig()
+	-- For override
 end
 
 function MODULE:OnEnabled()
