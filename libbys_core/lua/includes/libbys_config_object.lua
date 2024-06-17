@@ -9,6 +9,14 @@ function CONOBJ:ConfigInit()
 	self.m_ConfigCategories = {}
 end
 
+function CONOBJ:GetConfig()
+	return self.m_Config
+end
+
+function CONOBJ:GetConfigCategories()
+	return self.m_ConfigCategories
+end
+
 function CONOBJ:SetConfigValue(key, value)
 	-- Wipe it out
 	if value == nil then
