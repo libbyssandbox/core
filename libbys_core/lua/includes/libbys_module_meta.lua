@@ -14,6 +14,7 @@ function MODULE:Init()
 	self:ConfigInit()
 
 	self.m_ConVars = {}
+	self.m_Hooks = {}
 end
 
 function MODULE:Setup(name)
@@ -54,10 +55,20 @@ function MODULE:AddHook(event, callback)
 	hook.Add(event, self:GetName(), function(...)
 		return callback(self, ...)
 	end)
+
+	self.m_Hooks[event] = true
 end
 
 function MODULE:RemoveHook(event)
 	hook.Remove(event, self:GetName())
+
+	self.m_Hooks[event] = nil
+end
+
+function MODULE:RemoveHooks(event)
+	for k, _ in next, self.m_Hooks do
+		hook.Remove(event, self:GetName())
+	end
 end
 
 function MODULE:CreateConVar(name, default, flags, help, min, max)
