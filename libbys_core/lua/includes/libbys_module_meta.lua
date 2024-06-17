@@ -15,8 +15,6 @@ end
 function MODULE:Setup(name)
 	self:SetName(name)
 	self:SetEnabled(true)
-
-	print("Setup")
 end
 
 function MODULE:OnEnabled()
