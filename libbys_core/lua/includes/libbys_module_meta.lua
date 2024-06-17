@@ -25,6 +25,18 @@ function MODULE:OnDisabled()
 	-- For override
 end
 
+function MODULE:AddHook(event, callback)
+	gameevent.Listen(event)
+
+	hook.Add(event, self:GetName(), function(...)
+		return callback(self, ...)
+	end)
+end
+
+function MODULE:RemoveHook(event)
+	hook.Remove(event, self:GetName())
+end
+
 function MODULE:SetEnabled(status)
 	self:SetEnabled_Internal(status)
 
