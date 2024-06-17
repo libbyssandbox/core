@@ -18,3 +18,11 @@ function string.ToPascalKey(str)
 
 	return string.gsub(str, "[^%a]", "")
 end
+
+function string.ToSnakeKey(str)
+	str = string.Trim(str)
+	str = string.lower(str)
+	str = string.Replace(str, " ", "_")
+
+	return string.gsub(str, "[^%a_]", "")
+end
