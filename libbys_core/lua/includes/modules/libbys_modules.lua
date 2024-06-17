@@ -49,4 +49,6 @@ function libbys:FinishModule() -- Needed because calling :Setup from :StartModul
 	end
 
 	ModuleEnvironment._MODULE:Setup(ModuleEnvironment._MODULE_NAME)
+
+	setfenv(2, _G)
 end
