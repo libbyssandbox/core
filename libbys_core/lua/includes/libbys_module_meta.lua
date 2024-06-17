@@ -25,6 +25,13 @@ function MODULE:OnDisabled()
 	-- For override
 end
 
+function MODULE:SetEnabled(status)
+	self:SetEnabled_Internal(status)
+
+	util.SafeCallback(self:GetEnabled_Internal() and self.OnEnabled or self.OnDisabled, self)
+end
+MODULE.GetEnabled = MODULE.GetEnabled_Internal
+
 function MODULE:AddHook(event, callback)
 	gameevent.Listen(event)
 
@@ -36,12 +43,5 @@ end
 function MODULE:RemoveHook(event)
 	hook.Remove(event, self:GetName())
 end
-
-function MODULE:SetEnabled(status)
-	self:SetEnabled_Internal(status)
-
-	util.SafeCallback(self:GetEnabled_Internal() and self.OnEnabled or self.OnDisabled, self)
-end
-MODULE.GetEnabled = MODULE.GetEnabled_Internal
 
 return setmetatable(MODULE, ConfigObject)
