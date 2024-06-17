@@ -23,7 +23,11 @@ local ModuleMeta = include("includes/libbys_module_meta.lua")
 function libbys:StartModule(name)
 	name = string.ToPascalKey(name)
 
-	if istable(self.modules.ModuleList[name]) then
+	local existing = self.modules.ModuleList[name]
+
+	if istable(existing) then
+		existing:RemoveHooks()
+
 		FormatErrorNoHalt("Re-defining module %s", name)
 	end
 
