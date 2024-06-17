@@ -51,7 +51,7 @@ function CONOBJ:SetConfigCategory(key, category)
 	local existing = self:GetConfigCategory(key)
 
 	if existing then
-		existing[key] = nil
+		self.m_ConfigCategories[existing][key] = nil
 	end
 	if category == nil then return end
 
