@@ -42,6 +42,9 @@ function MODULE:SetEnabled(status)
 	self:SetEnabled_Internal(status)
 
 	util.SafeCallback(self:GetEnabled_Internal() and self.OnEnabled or self.OnDisabled, self)
+
+	-- Global callback
+	hook.Run("Libbys_ModuleEnabledDisabled", self, self:GetEnabled_Internal())
 end
 MODULE.GetEnabled = MODULE.GetEnabled_Internal
 
