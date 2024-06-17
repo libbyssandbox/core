@@ -10,6 +10,8 @@ AccessorFunc(MODULE, "m_bEnabled", "Enabled_Internal", FORCE_BOOL)
 
 function MODULE:Init()
 	self:ConfigInit()
+
+	self.m_ConVars = {}
 end
 
 function MODULE:Setup(name)
@@ -42,6 +44,30 @@ end
 
 function MODULE:RemoveHook(event)
 	hook.Remove(event, self:GetName())
+end
+
+function MODULE:CreateConVar(name, default, flags, help, min, max)
+	name = string.ToSnakeKey(name)
+
+	local existing = GetConVar(name)
+
+	if existing then
+		self.m_ConVars[name] = existing
+	else
+		self.m_ConVars[name] = CreateConVar(name, default, flags, help, min, max)
+	end
+
+	return self.m_ConVars[name]
+end
+
+function MODULE:GetConVars()
+	return self.m_ConVars
+end
+
+function MODULE:GetConVar(name)
+	name = string.ToSnakeKey(name)
+
+	return self.m_ConVars[name]
 end
 
 return setmetatable(MODULE, ConfigObject)
