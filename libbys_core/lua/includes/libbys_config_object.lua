@@ -22,6 +22,7 @@ function CONOBJ:SetConfigValue(key, value)
 	if value == nil then
 		self:SetConfigCategory(key, nil)
 		self.m_Config[key] = nil
+		self.m_ConfigTypes[key] = nil
 
 		return
 	end
