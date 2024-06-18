@@ -26,3 +26,26 @@ function string.ToSnakeKey(str)
 
 	return string.gsub(str, "[^%a_]", "")
 end
+
+function string.ToIndex(str)
+	local SourceFenv = getfenv(2)
+	setfenv(1, SourceFenv)
+
+	local Result, LastKey, LastLocation
+	local Blocks = string.Split(str, ".")
+
+	for i = 1, #Blocks do
+		local LastResult = Result or SourceFenv
+
+		Result = LastResult[Blocks[i]]
+
+		if Result == nil then
+			return nil
+		end
+
+		LastKey = Blocks[i]
+		LastLocation = LastResult
+	end
+
+	return Result, LastKey, LastLocation
+end
