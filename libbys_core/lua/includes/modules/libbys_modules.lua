@@ -56,3 +56,9 @@ function libbys:FinishModule() -- Needed because calling :Setup from :StartModul
 
 	setfenv(2, _G)
 end
+
+function libbys:FindModule(name)
+	name = string.ToPascalKey(name)
+
+	return self.modules.ModuleList[name]
+end
