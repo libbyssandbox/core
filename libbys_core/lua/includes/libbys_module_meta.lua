@@ -31,6 +31,10 @@ function MODULE:SetupConfig()
 	-- For override
 end
 
+function MODULE:OnConfigValueChanged(key, old, new)
+	-- For override
+end
+
 function MODULE:OnEnabled()
 	-- For override
 end

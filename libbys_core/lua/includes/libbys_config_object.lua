@@ -17,12 +17,20 @@ function CONOBJ:GetConfigCategories()
 	return self.m_ConfigCategories
 end
 
+function CONOBJ:OnConfigValueChanged(key, old, new)
+	-- For override
+end
+
 function CONOBJ:SetConfigValue(key, value)
+	local OldValue = self.m_Config[key]
+
 	-- Wipe it out
 	if value == nil then
 		self:SetConfigCategory(key, nil)
 		self.m_Config[key] = nil
 		self.m_ConfigTypes[key] = nil
+
+		self:OnConfigValueChanged(key, OldValue, nil)
 
 		return
 	end
@@ -39,6 +47,8 @@ function CONOBJ:SetConfigValue(key, value)
 		-- Add to default category
 		self:SetConfigCategory(key, "Global")
 	end
+
+	self:OnConfigValueChanged(key, OldValue, self.m_Config[key])
 end
 
 function CONOBJ:GetConfigValue(key)
