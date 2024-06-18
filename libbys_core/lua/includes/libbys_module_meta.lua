@@ -44,7 +44,10 @@ function MODULE:OnDisabled()
 end
 
 function MODULE:SetEnabled(status)
+	local old_status = self:GetEnabled()
 	self:SetEnabled_Internal(status)
+
+	if old_status == self:GetEnabled() then return end
 
 	util.SafeCallback(self:GetEnabled_Internal() and self.OnEnabled or self.OnDisabled, self)
 
