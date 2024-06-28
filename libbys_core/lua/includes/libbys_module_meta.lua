@@ -72,9 +72,9 @@ function MODULE:RemoveHook(event)
 	self.m_Hooks[event] = nil
 end
 
-function MODULE:RemoveHooks(event)
+function MODULE:RemoveHooks()
 	for k, _ in next, self.m_Hooks do
-		hook.Remove(event, self:GetName())
+		hook.Remove(k, self:GetName())
 	end
 end
 
